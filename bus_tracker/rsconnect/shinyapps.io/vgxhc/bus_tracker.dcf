@@ -1,0 +1,12 @@
+name: bus_tracker
+title: bus_tracker
+username:
+account: vgxhc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2834245
+bundleId: 3644285
+url: https://vgxhc.shinyapps.io/bus_tracker/
+when: 1600445670.01623
+asMultiple: FALSE
+asStatic: FALSE
