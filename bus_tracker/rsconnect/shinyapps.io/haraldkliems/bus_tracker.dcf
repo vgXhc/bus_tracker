@@ -1,0 +1,13 @@
+name: bus_tracker
+title: bus_tracker
+username:
+account: haraldkliems
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2834245
+bundleId: 6215504
+url: https://haraldkliems.shinyapps.io/bus_tracker/
+when: 1660856603.12488
+lastSyncTime: 1660856603.12489
+asMultiple: FALSE
+asStatic: FALSE

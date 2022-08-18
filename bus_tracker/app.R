@@ -6,17 +6,34 @@ library(tidytransit)
 # set map icon for bus
 bus_icon <- makeAwesomeIcon(icon = "bus",
                              library = "fa")
+
+# get route information from GTFS file
+download.file("http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip", destfile = "data/mmt_gtfs.zip")
+
+gtfs <- read_gtfs("data/mmt_gtfs.zip")
+routes <- gtfs$routes
+
 # read route information RDS file
 # This has been extracted from the complete GTFS file for 
 # faster processing
-routes <- readRDS("data/routes.RDS")
+#routes <- readRDS("data/routes.RDS")
+
+#create list of all vehicle IDs currently in service
+tmp <- read_json("http://transitdata.cityofmadison.com/Vehicle/VehiclePositions.json", simplifyVector = T)
+vehicles_in_service <- tmp$entity$vehicle$vehicle$label
 
 ui <- fluidPage(
-    titlePanel("Where is the Madison Bike Week bus?"),
+    titlePanel("Where is the Metro bus?"),
+    p("Do want to track a specific Metro bus, for example one of the new battery-electric buses? You can do so here, as long as you know the vehicle ID."),
+    checkboxGroupInput("vehicle_input", "Which of these vehicles do you want to display?", 
+                       vehicles_in_service, 
+                       inline = T,
+                       selected = vehicles_in_service[1]
+                          ),
+    actionButton("recalc", "Confirm/refresh"),
     leafletOutput("mymap"),
     p(),
-    actionButton("recalc", "Refresh position"),
-    p("If you see a blank world map, the bus is not in service. Try again later."),
+
     p("Source code:", a("https://github.com/vgXhc/bus_tracker", href="https://github.com/vgXhc/bus_tracker"))
 )
 
@@ -27,7 +44,7 @@ server <- function(input, output, session) {
         pos <- read_json("http://transitdata.cityofmadison.com/Vehicle/VehiclePositions.json", simplifyVector = T)
         pos <- pos$entity
         bus <- pos %>%
-            filter(vehicle$vehicle$label == "148")
+            filter(vehicle$vehicle$label %in% input$vehicle_input)
         route <- bus$vehicle$trip %>%
             left_join(routes, by = "route_id")
         x <- paste0("Route: ", route$route_short_name, "<br>",
@@ -41,7 +58,7 @@ server <- function(input, output, session) {
         pos <- pos$entity
         #filter out bus of interest 
         bus <- pos %>%
-            filter(vehicle$vehicle$label == "148")
+            filter(vehicle$vehicle$label %in% input$vehicle_input)
         #return value: long/lat of bus position
         cbind(bus$vehicle$position$longitude, bus$vehicle$position$latitude)
         
