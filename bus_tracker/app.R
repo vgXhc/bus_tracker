@@ -32,7 +32,8 @@ ui <- fluidPage(
     leafletOutput("mymap"),
     p(),
 
-    p("Source code:", a("https://github.com/vgXhc/bus_tracker", href="https://github.com/vgXhc/bus_tracker"))
+    p("Source code:", a("https://github.com/vgXhc/bus_tracker", href="https://github.com/vgXhc/bus_tracker")),
+    p("Help me cover the hosting costs for this project with a tip", HTML("<a href='https://ko-fi.com/X8X5EIPI8' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>"))
 )
 
 server <- function(input, output, session) {
