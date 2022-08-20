@@ -25,6 +25,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: show directory for debug
         run: ls
+      - run: cd $GITHUB_WORKSPACE && ls
         
       - name: download GTFS file
         run: wget -P bus_tracker/data/ http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
