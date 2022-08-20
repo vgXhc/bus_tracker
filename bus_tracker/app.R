@@ -3,9 +3,7 @@ library(jsonlite)
 library(leaflet)
 library(tidyverse)
 library(tidytransit)
-# set map icon for bus
-bus_icon <- makeAwesomeIcon(icon = "bus",
-                             library = "fa")
+
 
 # get route information from GTFS file
 download.file("http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip", destfile = "data/mmt_gtfs.zip")
@@ -38,6 +36,8 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
+
+  
     ## create popup text by joining vehicle position data with route data
     
     lab <- eventReactive(input$recalc, {
@@ -59,10 +59,15 @@ server <- function(input, output, session) {
         #filter out bus of interest 
         bus <- pos %>%
             filter(vehicle$vehicle$label %in% input$vehicle_input)
+        bus_icon <- makeAwesomeIcon(icon = "arrow-up",
+                                    library = "fa",
+                                    iconRotate = bus$vehicle$position$bearing)
         #return value: long/lat of bus position
-        cbind(bus$vehicle$position$longitude, bus$vehicle$position$latitude)
+        list(cbind(bus$vehicle$position$longitude, bus$vehicle$position$latitude), bus_icon)
         
     }, ignoreNULL = FALSE)
+    
+
     
   
         
@@ -71,8 +76,8 @@ server <- function(input, output, session) {
             addProviderTiles(providers$Stamen.TonerLite,
                              options = providerTileOptions(noWrap = TRUE)
             ) %>%
-            addAwesomeMarkers(data = veh_pos(), 
-                              icon = bus_icon,
+            addAwesomeMarkers(data = veh_pos()[[1]], 
+                              icon = veh_pos()[[2]],
                               popup = lab())
     })
 }
