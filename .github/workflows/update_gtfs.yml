@@ -27,9 +27,9 @@ jobs:
         run: wget http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip $GITHUB_WORKSPACE/bus_tracker/data/
 
       - name: Update files on GitHub
-      uses: test-room-7/action-update-file@v1.6.0
-      with:
-        file-path: $GITHUB_WORKSPACE/bus_tracker/data/mmt_gtfs.zip
-        commit-msg: Updated GTFS file
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        uses: test-room-7/action-update-file@v1.6.0
+        with:
+              file-path: $GITHUB_WORKSPACE/bus_tracker/data/mmt_gtfs.zip
+              commit-msg: Updated GTFS file
+              github-token: ${{ secrets.GITHUB_TOKEN }}
 
