@@ -24,7 +24,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: download GTFS file
-        run: wget http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip bus_tracker/data/mmt_gtfs.zip
+        run: wget -P bus_tracker/data/ -O mmt_gtfs.zip http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 
       - name: Update files on GitHub
         uses: test-room-7/action-update-file@v1.6.0
