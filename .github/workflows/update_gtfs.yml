@@ -35,7 +35,7 @@ jobs:
       - name: Update files on GitHub
         uses: test-room-7/action-update-file@v1.6.0
         with:
-              file-path: bus_tracker/data/mmt_gtfs.zip
+              file-path: ../bus_tracker/data/mmt_gtfs.zip
               commit-msg: Updated GTFS file
               github-token: ${{ secrets.GITHUB_TOKEN }}
 
