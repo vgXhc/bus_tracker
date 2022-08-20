@@ -24,7 +24,7 @@ vehicles_in_service <- tmp$entity$vehicle$vehicle$label
 
 ui <- fluidPage(
     titlePanel("Where is the Metro bus?"),
-    p("Do want to track a specific Metro bus, for example one of the new battery-electric buses? You can do so here, as long as you know the vehicle ID."),
+    p("Do want to track a specific Metro bus, for example one of the new battery-electric buses (vehicle IDs 2001, 2002, 2003)? You can do so here, as long as you know the vehicle ID."),
     checkboxGroupInput("vehicle_input", "Which of these vehicles do you want to display?", 
                        vehicles_in_service, 
                        inline = T,
