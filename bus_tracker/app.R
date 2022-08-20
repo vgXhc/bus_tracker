@@ -6,7 +6,7 @@ library(tidytransit)
 
 
 # get route information from GTFS file
-download.file("http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip", destfile = "data/mmt_gtfs.zip")
+# download.file("http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip", destfile = "data/mmt_gtfs.zip")
 
 gtfs <- read_gtfs("data/mmt_gtfs.zip")
 routes <- gtfs$routes

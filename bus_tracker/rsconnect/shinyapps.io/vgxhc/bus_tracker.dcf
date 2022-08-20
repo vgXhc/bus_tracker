@@ -5,9 +5,9 @@ account: vgxhc
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2834245
-bundleId: 6221224
+bundleId: 6221426
 url: https://haraldkliems.shinyapps.io/bus_tracker/
-when: 1661020491.24587
-lastSyncTime: 1661020491.24587
+when: 1661028983.84305
+lastSyncTime: 1661028983.84305
 asMultiple: FALSE
 asStatic: FALSE
